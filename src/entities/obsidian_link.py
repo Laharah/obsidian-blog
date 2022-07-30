@@ -31,7 +31,7 @@ class ObsidianLink:
         if not_found:
             return content.replace(self.data.placeholder, self.title)
 
-        link = f'[{self.data.title}]({self.data.meta.get("link")})'
+        link = f"[{self.data.title}]({self.data.slug})"
         return content.replace(self.data.placeholder, link)
 
     @classmethod
@@ -62,12 +62,15 @@ class ObsidianLink:
                     continue
 
                 filename = fs.find_one_by_glob(f"**/{filename}")
+
                 _, meta, _ = fs.load(filename)
 
-                url = meta.get("link")
-                if not url:
+                can_link = meta.get("publish")
+                if not can_link:
                     meta["not_found"] = True
-                    print(f"- [LINK NOT FOUND] Link is not defined for {placeholder}")
+                    print(
+                        f"- [LINK REJECTED] Link found for {placeholder} but it is not published."
+                    )
 
                 data = ContentData(
                     placeholder=placeholder,
@@ -79,7 +82,7 @@ class ObsidianLink:
                 include = cls(data)
                 includes.append(include)
 
-                print(f"- [PARSED]: Link: {placeholder}, {url}")
+                print(f"- [PARSED]: Link: {placeholder}, {can_link}")
             except Exception as e:
                 print(f'- [LINK NOT FOUND] "{placeholder}" {e}')
 
