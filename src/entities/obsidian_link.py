@@ -65,7 +65,7 @@ class ObsidianLink:
 
                 _, meta, _ = fs.load(filename)
 
-                can_link = meta.get("publish")
+                can_link = meta.get("published")
                 if not can_link:
                     meta["not_found"] = True
                     print(
