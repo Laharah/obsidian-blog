@@ -51,6 +51,10 @@ class Builder:
             pages = getattr(self.vault, entity)
             for page in pages:
                 print(f"- {page.data.title}")
+                if entity == "posts":
+                    page.data.meta["type"]="post"
+                else:
+                    page.data.meta["type"]="page"
                 if page.data.is_private:
                     print(
                         f"- [SKIP]: '{page.data.title}' is private, add `published: True` attribute to the frontmetter to publish it"
@@ -135,8 +139,10 @@ class Builder:
         global_ctx = {
             "config": self.config,
             "layouts": self.blog.layouts,
+            "partials": self.blog.partials,
             "pages": self.vault.pages,
             "posts": self.vault.posts,
+            "helpers": self.blog.helpers,
         }
         global_ctx.update(local_ctx)
         return global_ctx

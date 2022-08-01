@@ -61,6 +61,7 @@ def main():
             t.start()
     except Exception as e:
         print(e)
+        raise
 
 
 if __name__ == "__main__":

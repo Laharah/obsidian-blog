@@ -2,6 +2,7 @@ import frontmatter
 import glob
 import os
 import shutil
+from datetime import datetime
 from distutils.dir_util import copy_tree
 from shutil import copyfile
 
@@ -69,6 +70,8 @@ def find_one_by_glob(g):
 def load(filename):
     try:
         f = frontmatter.load(filename)
+        if not f.metadata.get("date"):
+            f.metadata["date"] = datetime.fromtimestamp(os.stat(filename).st_ctime)
         return [filename, f.metadata, f.content]
     except Exception as error:
         print(f"[ERROR] There is an error loading {filename}: {error}")

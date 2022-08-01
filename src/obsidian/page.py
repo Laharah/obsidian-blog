@@ -39,6 +39,9 @@ class Page:
             except UnicodeDecodeError as e:
                 continue
 
+            folder = os.path.split(os.path.dirname(filename))[-1]
+            meta["folder"] = folder
+
             content_data = ContentData(filename=filename, meta=meta, content=content)
 
             page = Page(content_data)
@@ -68,8 +71,9 @@ class Page:
         if self.data.ext == ".md":
             content = self.render_entities()
             content = markdown.render(content)
+        fn = handlebars.create_template_fn(content)
         try:
-            return handlebars.render_template(content, context)
+            return fn(context, helpers=context["helpers"])
         except:
             return content
 

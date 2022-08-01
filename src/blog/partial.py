@@ -5,7 +5,7 @@ from src.converters import handlebars
 
 
 @dataclass
-class Layout:
+class Partial:
     def __init__(self, filename):
         self.filename = filename
         with open(filename) as f:
@@ -14,7 +14,7 @@ class Layout:
 
     @property
     def name(self):
-        name, _ = os.path.splitext(os.path.basename(self.filename))
+        name = os.path.basename(self.filename)
         return name
 
     @property
@@ -24,16 +24,14 @@ class Layout:
         return handlebars.create_template_fn(hbs_str)
 
     @staticmethod
-    def get_all(layouts_dir):
-        layouts = {}
+    def get_all(partials_dir):
+        partials = {}
 
-        for file in fs.get_files_in_dir(layouts_dir):
-            layout = Layout(file)
-            layouts[layout.name] = layout
+        for file in fs.get_files_in_dir(partials_dir):
+            partial = Partial(file)
+            partials[partial.name] = partial
 
-        return layouts
+        return partials
 
-    def render(self, ctx):
-        fn = self.fn
-        partials = {name: p.fn for name, p in ctx["partials"].items()}
-        return fn(ctx, partials=partials, helpers=ctx["helpers"])
+    # def render(self, ctx):
+    #     return self.fn(ctx)
