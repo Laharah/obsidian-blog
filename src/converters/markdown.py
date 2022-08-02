@@ -5,7 +5,8 @@ md_parser = Markdown(
         'fenced_code',
         'markdown_link_attr_modifier',
         'attr_list',
-        'tables'
+        'tables',
+        'md4mathjax'
     ],
     extension_configs={
         "markdown_link_attr_modifier": {
