@@ -53,15 +53,15 @@ class Builder:
 
             pages = getattr(self.vault, entity)
             for page in pages:
-                print(f"- {page.data.title}")
+                # print(f"- {page.data.title}")
                 if entity == "posts":
                     page.data.meta["type"]="post"
                 else:
                     page.data.meta["type"]="page"
                 if page.data.is_private:
-                    print(
-                        f"- [SKIP]: '{page.data.title}' is private, add `published: True` attribute to the frontmetter to publish it"
-                    )
+                    # print(
+                    #     f"- [SKIP]: '{page.data.title}' is private, add `published: True` attribute to the frontmetter to publish it"
+                    # )
                     continue
                 self.preprocess_content(page)
                 self.process_assets(page)

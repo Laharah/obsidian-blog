@@ -63,7 +63,7 @@ class ContentData:
 
     @property
     def ext(self):
-        print(self.filename)
+        # print(self.filename)
         _, ext = os.path.splitext(self.filename)
         return ext
 
