@@ -29,7 +29,7 @@ def make_dir(directory: str):
 
 def copy_dir(source: str, dest: str):
     """copies given directory content into another one"""
-    copy_tree(source, dest)
+    shutil.copytree(source, dest, dirs_exist_ok=True)
 
 
 def get_files_in_dir(dir: str, filter_partials=False):

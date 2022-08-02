@@ -27,6 +27,7 @@ class ConfigData:
     assets_dir: str = '.blog/_assets'
     assets_dest_dir: str = '.build/static'
     public_dir: str = '/static'
+    refresh_delay: int = 40
     default_layout: str = 'main'
 >>>>>>> Add support for partials, helpers, and more custom config
     port: int = 4200
