@@ -35,5 +35,6 @@ class WatcherTask:
                 if is_ignored:
                     return
                 self.scheduler.request_refresh(callback)
+                print(f"Rebuild requested because of change in {event.src_path}")
 
         return Handler

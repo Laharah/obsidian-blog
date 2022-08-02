@@ -36,6 +36,8 @@ class ConfigData:
         """override config values from a given dict"""
         for k, v in config.items():
             setattr(self, k, v)
+        self.refresh_delay = int(self.refresh_delay)
+        self.port = int(self.port)
 
     def load_dotenv(self):
         self.override(dotenv_values(".env"))
