@@ -31,7 +31,7 @@ class Blog:
         def _neq(this, a, b):
             return a != b
 
-        helpers["neq"] = _neq
+        helpers["ifneq"] = _neq
 
         def _date_format(this, d:datetime, format:str):
             return d.strftime(format)
