@@ -2,9 +2,10 @@ from markdown import Markdown
 
 md_parser = Markdown(
     extensions=[
-        "fenced_code",
-        "markdown_link_attr_modifier",
-        "attr_list",
+        'fenced_code',
+        'markdown_link_attr_modifier',
+        'attr_list',
+        'tables'
     ],
     extension_configs={
         "markdown_link_attr_modifier": {
