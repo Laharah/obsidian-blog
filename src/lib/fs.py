@@ -58,7 +58,7 @@ def copy_file(src: str, dest: str):
 
 def write_file(dest, content):
     os.makedirs(os.path.dirname(dest), exist_ok=True)
-    with open(dest, "a") as f:
+    with open(dest, "w") as f:
         print(content, file=f)
 
 
