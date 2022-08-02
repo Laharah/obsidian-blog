@@ -9,7 +9,7 @@ lock = False
 
 class BuilderTask:
     @staticmethod
-    def run(config=ConfigData):
+    def run(config=ConfigData, clean=True):
         global lock
         if lock:
             return
@@ -19,7 +19,7 @@ class BuilderTask:
         vault = ObsidianVault(config=config)
         blog = Blog(config=config)
         builder = Builder(config=config, vault=vault, blog=blog)
-        builder.build()
+        builder.build(clean=clean)
         toc = time.perf_counter()
 
         print("---\n")

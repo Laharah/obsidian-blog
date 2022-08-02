@@ -25,21 +25,24 @@ class Builder:
         self.blog = blog
         self.vault = vault
 
-    def build(self):
-        self.make_build_dir()
+    def build(self, clean=True):
+        self.make_build_dir(clean)
         self.copy_assets()
         self.render_all()
 
-    def make_build_dir(self):
+    def make_build_dir(self, clean):
         dest_dir = self.config.dest_dir
         print(f"- Prepare a build dir: {dest_dir}")
-        fs.rm_dir(dest_dir)
-        fs.make_dir(dest_dir)
+        if clean:
+            fs.rm_dir(dest_dir)
+        if not os.path.isdir(dest_dir): 
+            fs.make_dir(dest_dir)
 
     def copy_assets(self):
         assets_dir = self.config.assets_dir
-        assets_dest_dir = self.blog.config.assets_dest_dir
-        fs.make_dir(assets_dest_dir)
+        assets_dest_dir = self.config.assets_dest_dir
+        if not os.path.isdir(assets_dest_dir):
+            fs.make_dir(assets_dest_dir)
         print(f"- Copy assets from {assets_dir} to {assets_dest_dir}")
         fs.copy_dir(assets_dir, assets_dest_dir)
 

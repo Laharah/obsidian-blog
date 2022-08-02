@@ -16,7 +16,7 @@ class WatcherTask:
         WatcherTask(config)
 
     def callback(self):
-        BuilderTask.run(self.config)
+        BuilderTask.run(self.config, clean=False)
 
     def start_watcher(self, ignore_dir):
         Handler = self.create_handler(ignore_dir, self.callback)
