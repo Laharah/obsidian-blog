@@ -68,9 +68,9 @@ class ObsidianLink:
                 can_link = meta.get("published")
                 if not can_link:
                     meta["not_found"] = True
-                    print(
-                        f"- [LINK REJECTED] Link found for {placeholder} but it is not published."
-                    )
+                    # print(
+                    #     f"- [LINK REJECTED] Link found for {placeholder} but it is not published."
+                    # )
 
                 data = ContentData(
                     placeholder=placeholder,
@@ -82,7 +82,7 @@ class ObsidianLink:
                 include = cls(data)
                 includes.append(include)
 
-                print(f"- [PARSED]: Link: {placeholder}, {can_link}")
+                # print(f"- [PARSED]: Link: {placeholder}, {can_link}")
             except Exception as e:
                 print(f'- [LINK NOT FOUND] "{placeholder}" {e}')
 

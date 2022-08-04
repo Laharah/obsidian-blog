@@ -27,6 +27,6 @@ class ReferenceImage(Image):
                 filename=normalize_path(filename),
             )
             imgs.append(ReferenceImage(data=data))
-            print(f"- [PARSED]: Image: {filename}")
+            # print(f"- [PARSED]: Image: {filename}")
 
         return imgs

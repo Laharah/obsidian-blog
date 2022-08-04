@@ -28,7 +28,7 @@ class MarkdownImage(Image):
 
     @staticmethod
     def get_matches(content):
-        print("content", content)
+        # print("content", content)
         markdown = markdownFabric(renderer=ASTRenderer)
         ast = markdown(content)
         res = get_all_of_types(["obsidian_embed"], ast)

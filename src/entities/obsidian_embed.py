@@ -82,7 +82,7 @@ class ObsidianEmbed:
                     entity = ObsidianEmbed(embed)
                     entities.append(entity)
 
-                print(f"- [PARSED]: Include: {placeholder}")
+                # print(f"- [PARSED]: Include: {placeholder}")
             except Exception as e:
                 print(f'- [NOT FOUND] "{placeholder}" {e}')
 

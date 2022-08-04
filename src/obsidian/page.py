@@ -83,10 +83,10 @@ class Page:
                 data = entity.data
                 if hasattr(data, "is_private") and data.is_private:
                     if data.content != "":
-                        print(data.content)
-                        print(
-                            f"  - [SKIP]: {data.placeholder} is private, add `published: True` attribute to the frontmetter to publish it"
-                        )
+                        # print(data.content)
+                        # print(
+                        #     f"  - [SKIP]: {data.placeholder} is private, add `published: True` attribute to the frontmetter to publish it"
+                        # )
                         continue
                 self.data.content = entity.render(self.data)
         return self.data.content
