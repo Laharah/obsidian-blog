@@ -70,10 +70,11 @@ def find_one_by_glob(g):
 def load(filename):
     try:
         f = frontmatter.load(filename)
-        if not f.metadata.get("note_created"):
-            f.metadata["date"] = datetime.fromtimestamp(os.stat(filename).st_ctime)
-        else:
-            f.metadata["date"] = datetime.fromisoformat(f.metadata.get("note_created"))
+        try:
+          d = f.metadata.get("note_created")
+          f.metadata["date"] = datetime.fromisoformat(d)
+        except (KeyError, ValueError): 
+            f.metadata["date"] = datetime.fromtimestamp(os.stat(filename).st_mtime)
         return [filename, f.metadata, f.content]
     except Exception as error:
         # print(f"[ERROR] There is an error loading {filename}: {error}")
