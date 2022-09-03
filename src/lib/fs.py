@@ -72,6 +72,8 @@ def load(filename):
         f = frontmatter.load(filename)
         if not f.metadata.get("note_created"):
             f.metadata["date"] = datetime.fromtimestamp(os.stat(filename).st_ctime)
+        else:
+            f.metadata["date"] = datetime.fromisoformat(f.metadata.get("note_created"))
         return [filename, f.metadata, f.content]
     except Exception as error:
         # print(f"[ERROR] There is an error loading {filename}: {error}")
