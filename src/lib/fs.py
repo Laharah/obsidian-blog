@@ -71,7 +71,7 @@ def load(filename):
     try:
         f = frontmatter.load(filename)
         try:
-          d = f.metadata.get("note_created")
+          d = f.metadata["note_created"]
           f.metadata["date"] = datetime.fromisoformat(d)
         except (KeyError, ValueError): 
             f.metadata["date"] = datetime.fromtimestamp(os.stat(filename).st_mtime)
