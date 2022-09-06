@@ -3,6 +3,7 @@ from src.blog.layout import Layout
 from src.blog.partial import Partial
 from datetime import datetime
 from src.dataclasses.config_data import ConfigData
+from pprint import pprint
 
 
 class Blog:
@@ -37,5 +38,10 @@ class Blog:
             return d.strftime(format)
 
         helpers["dateformat"] = _date_format
+
+        def _needs_header(this, title):
+            return not this.context["self"].content.startswith(f"# {title}")
+
+        helpers["needs_header"] = _needs_header
 
         return helpers
