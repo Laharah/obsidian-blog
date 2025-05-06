@@ -73,7 +73,7 @@ def load(filename):
         try:
           d = f.metadata["note_created"]
           f.metadata["date"] = datetime.fromisoformat(d)
-        except (KeyError, ValueError): 
+        except (KeyError, ValueError, TypeError): 
             f.metadata["date"] = datetime.fromtimestamp(os.stat(filename).st_mtime)
         return [filename, f.metadata, f.content]
     except Exception as error:

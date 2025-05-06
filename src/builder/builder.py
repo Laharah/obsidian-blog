@@ -9,6 +9,7 @@ from src.obsidian.vault import ObsidianVault
 from src.preprocessors.include_header import IncludeHeaderPreprocessor
 from src.preprocessors.further_reading import FurtherReadingLinksPreprocessor
 from src.preprocessors.note_delimeters import NoteDelimeterPreprocessor
+from src.preprocessors.hide_comments import HideCommentsPreprocessor
 
 
 class Builder:
@@ -18,6 +19,7 @@ class Builder:
         IncludeHeaderPreprocessor,
         FurtherReadingLinksPreprocessor,
         NoteDelimeterPreprocessor,
+        HideCommentsPreprocessor,
     ]
 
     def __init__(self, config: ConfigData, blog: Blog, vault: ObsidianVault):
@@ -35,7 +37,7 @@ class Builder:
         print(f"- Prepare a build dir: {dest_dir}")
         if clean:
             fs.rm_dir(dest_dir)
-        if not os.path.isdir(dest_dir): 
+        if not os.path.isdir(dest_dir):
             fs.make_dir(dest_dir)
 
     def copy_assets(self):
@@ -55,9 +57,9 @@ class Builder:
             for page in pages:
                 # print(f"- {page.data.title}")
                 if entity == "posts":
-                    page.data.meta["type"]="post"
+                    page.data.meta["type"] = "post"
                 else:
-                    page.data.meta["type"]="page"
+                    page.data.meta["type"] = "page"
                 if page.data.is_private:
                     # print(
                     #     f"- [SKIP]: '{page.data.title}' is private, add `published: True` attribute to the frontmetter to publish it"
