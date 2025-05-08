@@ -1,11 +1,16 @@
 from src.dataclasses.content_data import ContentData
 import regex as re
 
+DATAVIEW_PUBLISH_REGEX = re.compile(
+    r"%%\s?DATAVIEW_PUBLISHER.*?%%\s*(?P<content>.*?)%%\s?DATAVIEW_PUBLISHER:\s?end\s?%%",
+    re.DOTALL,
+)
 COMMENT_REGEX = re.compile(r"%%.*?%%(\r?\n)?", re.DOTALL)
 
 
 class HideCommentsPreprocessor:
     comment_regex = COMMENT_REGEX
+    dv_publish_regex = DATAVIEW_PUBLISH_REGEX
 
     @classmethod
     def process_page(cls, page):
@@ -16,13 +21,11 @@ class HideCommentsPreprocessor:
         data: ContentData = entity.data
         if not cls.is_supported_content(data):
             return
-        re.sub
         prev = data.content
+        data.content = cls.dv_publish_regex.sub(r"\1", data.content)
         data.content = cls.comment_regex.sub("", data.content)
-        if prev != data.content:
-            print(f'  - [PREPROCESS] removed comments in "{data.title}"')
-        else:
-            print(f'  - [PREPROCESS] no comments to remove for "{data.title}"')
+        if len(prev) != len(data.content):
+            print(f'- [PREPROCESS] removed comments in "{data.title}"')
 
     @classmethod
     def is_supported_content(cls, data: ContentData):

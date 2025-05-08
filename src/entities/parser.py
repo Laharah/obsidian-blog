@@ -2,7 +2,7 @@ from marko import inline, Markdown
 
 
 class ObsidianLink(inline.InlineElement):
-    pattern = r"\[\[\s*(.+?)\s*(?:\|\s*(.+?)\s*)?]\]"
+    pattern = r"\[\[\s*(.+?)\s*(?:\\?\|\s*(.+?)\s*)?]\]"
     parse_children = True
 
     def __init__(self, match):
